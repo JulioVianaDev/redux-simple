@@ -1,10 +1,10 @@
-import logo from './logo.svg';
+
 import './App.css';
-import PostForm from './components/PostForm';
-import AllPost from './components/AllPost';
 import { createStore } from "redux";
 import axios from 'axios'
 import { useState } from 'react';
+
+//criando o reducer para receber os dados quando for disparado o dispatch 
 const reducer = function(state,action){
   if (action.type === 'INC'){
     console.log('incrementando')
@@ -18,13 +18,14 @@ const reducer = function(state,action){
   }
   return state
 }
-
+//criando uma store usando o reducer e com um valor inicial 3
 const store = createStore(reducer,3);
 
+//quando o valor for mudado vai chamar esse método com o subscribe
 store.subscribe(function(){
   console.log("o estado mudou",store.getState())
 })
-
+//dispara as mudanças para o reducer que vai enviar para a store
 store.dispatch({type: 'INC',payload: 3});
 
 
@@ -43,8 +44,6 @@ function App() {
     <h1>Hello React!</h1>
     <button onClick={()=> PegarValor()}>Pegar dados</button>
     <button onClick={()=> console.log(valor)}>exibir dados</button>
-    <PostForm/>
-    <AllPost/>
   </div>
   );
 }
